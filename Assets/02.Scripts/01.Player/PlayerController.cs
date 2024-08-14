@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mousePosition - rb.position).normalized;
 
-        int layerMask = ~LayerMask.GetMask("Player");
+        int layerMask = ~LayerMask.GetMask("Player", "BackGround") ;
 
         RaycastHit2D hit = Physics2D.Raycast(rb.position, direction, Mathf.Infinity, layerMask);
 
@@ -248,6 +248,6 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(CalculateMidpoint(), 0.5f);
+        Gizmos.DrawWireSphere(CalculateMidpoint(), 1.2f);
     }
 }

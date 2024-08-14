@@ -53,6 +53,7 @@ public class IdleState : IState
 
         if (Input.GetMouseButton(1))
         {
+            Time.timeScale = 0.3f;
             if (Input.GetMouseButtonDown(0))
             {
                 if (player.currentJavelins > 0)
@@ -60,6 +61,10 @@ public class IdleState : IState
                     player.ThrowJavelin();
                 }
             }
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            Time.timeScale = 1f;
         }
     }
 }

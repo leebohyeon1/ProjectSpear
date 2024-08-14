@@ -5,15 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - BackGround
   - Javelin
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - BackGround
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 

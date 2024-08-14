@@ -32,6 +32,7 @@ public class FlyingState : IState
 
         if (Input.GetMouseButton(1))
         {
+            Time.timeScale = 0.3f;
             if (Input.GetMouseButtonDown(0))
             {
                 if (player.currentJavelins > 0)
@@ -39,6 +40,11 @@ public class FlyingState : IState
                     player.ThrowJavelin();
                 }
             }
+
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            Time.timeScale = 1f;
         }
     }
 
@@ -59,21 +65,10 @@ public class FlyingState : IState
         Vector2 direction = (targetPosition - (Vector2)player.transform.position).normalized; // 목표 위치로 향하는 방향
         player.rb.velocity = direction * player.flySpeed; // 방향과 속도를 기반으로 velocity 설정
 
-        if (player.GetJavelinCount() == 1)
+        // 목표 위치에 도달할 때까지 대기
+        while (Vector2.Distance(player.transform.position, targetPosition) > 1.2f)
         {
-            // 목표 위치에 도달할 때까지 대기
-            while (Vector2.Distance(player.transform.position, targetPosition) > 1.2f)
-            {
-                yield return null;
-            }
-        }
-        else
-        {
-            // 목표 위치에 도달할 때까지 대기
-            while (Vector2.Distance(player.transform.position, targetPosition) > 0.5f)
-            {
-                yield return null;
-            }
+            yield return null;
         }
 
         // 목표 위치에 도달하면 속도 0으로 설정하고 정확한 위치로 보정
